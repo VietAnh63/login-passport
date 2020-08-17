@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <meta charset='utf-8'>
+     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+     <title>Quan Ly quang cao</title>
+     <script src='/socket.io/socket.io.js'></script>
+     <script src="/js/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+
+     <script>
+          var socket = io.connect("http://localhost:3000")
+          $(document).ready(function () {
+               $("#listAd").change(function () {
+                    var v = $(this).val()
+                    $("#imageAd").attr("src", "upload/" + v)
+               })
+               $("#btnGui").click(function () {
+                    var value_image = $("#listAd").val()
+                    socket.emit("admin-send-data", { value_image })
+               })
+          })
+     </script>
+     <h1>Xin chao anh em</h1>
+     <select id="listAd">
+          <option value="">---</option>
+          <% arrAd.forEach(function(qc){ %>
+          <option value="<%=qc.hinh%>"><%=qc.hinh%></option>
+          <%})%>
+     </select>
+     <input type="button" id="btnGui" value="Send Ads">
+     <div>
+          <img id="imageAd" src="" width="400">
+     </div>
+</body>
+
+</html>

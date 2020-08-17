@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <meta charset='utf-8'>
+     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+     <title>Quan Ly quang cao</title>
+     <script src='/socket.io/socket.io.js'></script>
+     <script src="/js/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+     <script>
+          var socket = io.connect("http://localhost:3000")
+          socket.on("server-send-data", function (data) {
+
+               $("#result").html(data.value_image)
+               $("#imageAd").attr("src", "upload/" + data.value_image)
+          })
+
+     </script>
+     <div>
+          <div id="result"></div>
+          <img id="imageAd" src="" width="400">
+     </div>
+</body>
+</html>
