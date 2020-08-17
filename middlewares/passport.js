@@ -8,8 +8,6 @@ const passportfb = require("passport-facebook").Strategy;
 //import passport google
 const passportgg = require("passport-google-oauth").OAuth2Strategy;
 
-//236640011683-5o8rqb07gum136c64rep0e3jno2bau9g.apps.googleusercontent.com
-//u3En6M7d4O0t71cEmC1tebf9
 //passport for local
 passport.use(
   new LocalStrategy(
@@ -45,13 +43,12 @@ passport.use(
 passport.use(
   new passportfb(
     {
-      clientID: "2614293668674028",
-      clientSecret: "70020fd2091d72275a86af028834e96e",
+      clientID: "my clientId",
+      clientSecret: "my clientSeret app",
       callbackURL: "http://localhost:3000/auth/fb/cb",
       profileFields: ["email", "gender", "locale", "displayName"],
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       User.findOne({ authFacebookId: profile._json.id }, (err, user) => {
         if (err) return done(err);
         if (user) return done(null, user);
@@ -73,8 +70,8 @@ passport.use(
   new passportgg(
     {
       clientID:
-        "236640011683-5o8rqb07gum136c64rep0e3jno2bau9g.apps.googleusercontent.com",
-      clientSecret: "u3En6M7d4O0t71cEmC1tebf9",
+        "my clientId",
+      clientSecret: "my clientSecret app",
       followRedirects: true,
       callbackURL: "http://localhost:3000/auth/gg/cb",
     },
